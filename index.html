@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f8f3ef">
+  <meta name="description" content="MOOD BAR — интерактивная барная карта с каталогом коктейлей, конструктором своего напитка и оформлением заказа.">
+  <title>MOOD BAR — интерактивная барная карта</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <script defer src="./js/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#menu">Перейти к меню</a>
+
+  <header class="site-header" id="top">
+    <div class="header-inner shell">
+      <a href="#top" class="wordmark" aria-label="MOOD BAR, на главную">MOOD<span class="wordmark-dot">◆</span>BAR</a>
+      <nav class="desktop-nav" aria-label="Основная навигация">
+        <a href="#menu">Готовые коктейли</a>
+        <a href="#create">Создать свой</a>
+        <a href="#orders">Мои заказы</a>
+      </nav>
+      <button class="cart-trigger" id="header-cart" type="button" aria-label="Открыть корзину">
+        <span>Мой заказ</span><span class="cart-bag" aria-hidden="true">↗</span><span class="cart-badge" id="cart-count">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero shell" aria-labelledby="hero-title">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="hero-kicker">ЦИФРОВАЯ БАРНАЯ КАРТА</div>
+          <h1 id="hero-title">Выбери готовый коктейль или <span>собери свой</span>.</h1>
+          <p class="hero-intro">MOOD BAR — это простое меню для бара: можно быстро выбрать один из 12 коктейлей или собрать авторский напиток и сразу оформить заказ к столику.</p>
+          <div class="hero-actions">
+            <a class="button-main hero-button" href="#menu">Выбрать коктейль <span aria-hidden="true">↘</span></a>
+            <a class="button-secondary" href="#create">Создать свой <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="hero-facts" aria-label="Преимущества сервиса">
+            <div class="fact-item"><strong>12</strong><span>готовых коктейлей</span></div>
+            <div class="fact-item"><strong>2D</strong><span>предпросмотр своего напитка</span></div>
+            <div class="fact-item"><strong>1 мин</strong><span>чтобы оформить заказ</span></div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-top">КАК ЭТО РАБОТАЕТ</div>
+          <ol class="hero-steps">
+            <li><b>1.</b><span>Выбери готовый коктейль в каталоге</span></li>
+            <li><b>2.</b><span>Или перейди в конструктор и собери свой вкус</span></li>
+            <li><b>3.</b><span>Добавь напитки в заказ и укажи номер столика</span></li>
+          </ol>
+          <div class="hero-note">Яркая карта вкусов, понятные настройки и быстрый заказ — без лишней путаницы.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="menu-section shell" id="menu" aria-labelledby="menu-title">
+      <div class="section-head">
+        <div>
+          <div class="section-tag">ШАГ 1</div>
+          <h2 id="menu-title" class="section-title">Готовые коктейли</h2>
+          <p class="section-intro">Выбери напиток по вкусу, основе и цене. Нажми на карточку, чтобы посмотреть состав и добавить его в заказ.</p>
+        </div>
+        <div class="count-note"><span class="line-diamond"></span><span id="results-count">12 напитков</span></div>
+      </div>
+
+      <div class="filter-panel" aria-label="Фильтры коктейлей">
+        <div class="filter-group taste-filter">
+          <span class="filter-label">ВКУС</span>
+          <div class="flavor-chips" id="flavor-filters" role="group" aria-label="Фильтр по вкусу"></div>
+        </div>
+        <div class="filter-bottom">
+          <label class="filter-select">
+            <span class="filter-label">ОСНОВА</span>
+            <select id="base-filter">
+              <option value="all">Любая основа</option>
+              <option>Текила</option>
+              <option>Джин</option>
+              <option>Ром</option>
+              <option>Водка</option>
+              <option>Мескаль</option>
+            </select>
+          </label>
+          <div class="filter-range">
+            <div class="range-head"><label class="filter-label" for="price-filter">ДО <span id="price-value">790 ₽</span></label></div>
+            <input id="price-filter" type="range" min="600" max="790" step="10" value="790">
+          </div>
+          <button type="button" id="reset-filters" class="filter-reset">Сбросить ↺</button>
+          <div class="view-toggle" role="group" aria-label="Вид каталога">
+            <button class="view-button active" type="button" id="view-mosaic" aria-pressed="true" aria-label="Вид карточками">▦</button>
+            <button class="view-button" type="button" id="view-list" aria-pressed="false" aria-label="Вид списком">☷</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="cocktail-grid" class="cocktail-grid" aria-live="polite"></div>
+      <div class="empty-state hidden" id="empty-filter">
+        <span class="empty-symbol">◇</span>
+        <h3>НИЧЕГО НЕ НАЙДЕНО</h3>
+        <p>Попробуй изменить фильтры — возможно, нужный вкус чуть в стороне.</p>
+        <button type="button" class="text-button" id="empty-reset">Сбросить фильтры ↗</button>
+      </div>
+    </section>
+
+    <section class="between shell" aria-hidden="true">
+      <span>◆</span><div class="between-line"></div><span>ИЛИ</span><div class="between-line"></div><span>◆</span>
+    </section>
+
+    <section class="builder-section shell" id="create" aria-labelledby="builder-title">
+      <div class="section-head builder-head">
+        <div>
+          <div class="section-tag">ШАГ 2</div>
+          <h2 id="builder-title" class="section-title">Создай свой коктейль</h2>
+          <p class="section-intro">Настраивай основу, характер вкуса, лёд, украшение и размер. Слева — живой предпросмотр напитка, справа — все параметры.</p>
+        </div>
+      </div>
+
+      <div class="builder-layout">
+        <div class="builder-preview-col">
+          <div class="preview-sticky">
+            <div class="preview-panel" id="preview-panel">
+              <div class="preview-top"><span>ТВОЙ НАПИТОК</span><span id="preview-glass-label">РОКС / 240 МЛ</span></div>
+              <div id="art-mount" class="art-mount" role="img" aria-label="Живая иллюстрация коктейля меняется при выборе ингредиентов">
+                <div id="art-stage" class="art-stage">
+                  <div class="art-placeholder" aria-hidden="true">MOOD.</div>
+                </div>
+                <span class="art-side-note" aria-hidden="true">CREATE / YOUR / MOOD</span>
+              </div>
+              <div class="preview-bottom">
+                <div>
+                  <span class="preview-mini-label">ТВОЁ НАСТРОЕНИЕ</span>
+                  <strong id="preview-name">Фруктовый / Джин</strong>
+                </div>
+                <span class="preview-rotate-hint" id="preview-rotate-hint">ЦВЕТ • ВКУС • НАСТРОЕНИЕ</span>
+              </div>
+            </div>
+            <div class="preview-under"><span>◆</span> МЕНЯЙ НАСТРОЙКИ — НАПИТОК МЕНЯЕТСЯ СРАЗУ <span>◆</span></div>
+          </div>
+        </div>
+
+        <div class="builder-controls">
+          <div class="control-heading"><span>01 / ОСНОВА</span><h3>С чего начнём?</h3></div>
+          <div id="builder-base" class="option-grid base-grid" role="group" aria-label="Основа коктейля"></div>
+
+          <div class="control-heading"><span>02 / ВКУС</span><h3>Какой сегодня характер?</h3></div>
+          <div id="builder-flavor" class="option-grid flavor-grid" role="group" aria-label="Вкусовой профиль"></div>
+
+          <div class="control-heading"><span>03 / ДЕТАЛИ</span><h3>Настрой баланс</h3></div>
+          <div class="control-subtitle">СЛАДОСТЬ</div>
+          <div id="builder-sweetness" class="segmented" role="group" aria-label="Сладость"></div>
+          <div class="control-subtitle">ЛЁД</div>
+          <div id="builder-ice" class="segmented" role="group" aria-label="Количество льда"></div>
+
+          <div class="control-heading"><span>04 / УКРАШЕНИЕ</span><h3>Чем украсим?</h3></div>
+          <div id="builder-garnish" class="option-grid garnish-grid" role="group" aria-label="Украшение"></div>
+
+          <div class="control-heading"><span>05 / ФИНАЛ</span><h3>Последние штрихи</h3></div>
+          <div class="control-subtitle">РАЗМЕР</div>
+          <div id="builder-size" class="segmented sizes" role="group" aria-label="Размер"></div><p class="size-description" id="size-description">М — бокал рокс · 240 мл</p>
+
+          <div class="builder-bottom-inputs">
+            <label class="builder-name">
+              <span class="control-subtitle">НАЗВАНИЕ НАПИТКА</span>
+              <input id="builder-name" maxlength="40" value="Мой коктейль" placeholder="Придумай название" autocomplete="off">
+              <small id="builder-name-error" class="input-error"></small>
+            </label>
+            <div class="builder-qty">
+              <span class="control-subtitle">КОЛИЧЕСТВО</span>
+              <div class="qty-control">
+                <button type="button" data-builder-qty="-1" aria-label="Уменьшить количество">−</button>
+                <output id="builder-quantity">1</output>
+                <button type="button" data-builder-qty="1" aria-label="Увеличить количество">+</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="builder-checkout">
+            <div>
+              <span>ТВОЙ КОКТЕЙЛЬ</span>
+              <strong id="builder-total">500 ₽</strong>
+              <small id="builder-unit">500 ₽ / порция</small>
+            </div>
+            <button type="button" id="builder-add" class="button-main">В заказ <span>↗</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="orders" class="orders-section shell" aria-labelledby="orders-title">
+      <div class="section-head">
+        <div>
+          <div class="section-tag">ШАГ 3</div>
+          <h2 id="orders-title" class="section-title">Мои заказы</h2>
+          <p class="section-intro">Здесь появятся оформленные заказы. Их можно посмотреть и при необходимости отменить.</p>
+        </div>
+      </div>
+      <div id="orders-list" class="orders-list"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <span class="footer-logo">MOOD BAR<span>◆</span></span>
+      <span>ИНТЕРАКТИВНАЯ БАРНАЯ КАРТА</span>
+      <a href="#top">НАВЕРХ ↑</a>
+    </div>
+  </footer>
+
+  <button class="mobile-cart-pill hidden" id="mobile-cart" type="button" aria-label="Открыть заказ"><span><b id="mobile-cart-count">0</b> напитков</span><span id="mobile-cart-sum">0 ₽</span><span>↗</span></button>
+  <div class="overlay hidden" id="drawer-overlay"></div>
+
+  <aside class="drawer" id="detail-drawer" role="dialog" aria-modal="true" aria-labelledby="detail-title" aria-hidden="true">
+    <div class="drawer-top"><span class="drawer-kicker">ВЫБРАННЫЙ НАПИТОК</span><button class="close-btn" type="button" data-close-drawer aria-label="Закрыть">×</button></div>
+    <div id="detail-body" class="drawer-content"></div>
+  </aside>
+
+  <aside class="drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden="true">
+    <div class="drawer-top"><span class="drawer-kicker">ТВОЙ ЗАКАЗ</span><button class="close-btn" type="button" data-close-drawer aria-label="Закрыть">×</button></div>
+    <div class="drawer-content cart-body"><h2 id="cart-title">МОЙ ЗАКАЗ</h2><div id="cart-lines"></div><div id="cart-checkout"></div></div>
+  </aside>
+
+  <div class="dialog-overlay hidden" id="confirm-overlay">
+    <div class="confirm-dialog" id="confirm-dialog" role="dialog" aria-modal="true" aria-labelledby="confirm-title">
+      <button type="button" id="confirm-close" class="close-btn top-right" aria-label="Закрыть">×</button>
+      <div class="dialog-symbol">◆</div>
+      <h2 id="confirm-title">ГОТОВО</h2>
+      <div id="confirm-content"></div>
+      <button type="button" id="confirm-done" class="button-main">К моим заказам ↗</button>
+    </div>
+  </div>
+
+  <div class="toast-region" id="toast-region" role="status" aria-live="polite"></div>
+</body>
+</html>
